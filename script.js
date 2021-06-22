@@ -26,7 +26,7 @@ let board = Array.from( Array(9).keys() );
 //played by the AI
 function AIGamePlay(){
 
-    let nextIndex = board.filter(cell => typeof cell === 'number')[0];
+    let nextIndex = minimax(board , AIChar).index;
 
     if(nextIndex !== undefined){
 
@@ -53,20 +53,11 @@ function nextPlay(square){
 
         if(typeof board[clickID] === 'number'){ // check that were is being clicked is empty 
 
-            HPlay(clickID);
+            if( !turn(humanChar , clickID) ){
 
-            if (isWinner(humanChar)) { // check if the human won
+                turn(AIChar);
+            }//if
 
-                showResults('You are the winner');
-            }
-            else {
-
-                AIGamePlay();
-
-                if (isWinner(AIChar)) { // check if AI won after it played
-                    showResults('You are lost');
-                }
-            }//if-else
         }//if
     }
     else{
@@ -75,9 +66,37 @@ function nextPlay(square){
 
 }
 
+
+function turn(player , ID){
+
+    let gameOver = false;
+
+    if(player === humanChar){
+        HPlay(ID);
+    }
+    else{
+        AIGamePlay();
+    }
+
+    //after each player plays , check for win or tie
+
+    if( checkWinner(player) ){
+
+        showResults(text = player === humanChar ? 'You are the winner' : 'You lost');
+        gameOver = true;
+    }
+    else if( noMorePlay() ){
+
+        showResults('It is a tie');
+        gameOver = true;
+    }
+
+    return gameOver;
+}
+
 //this function checks if a player won the game 
 
-function isWinner(player){
+function checkWinner(player){
     let win = null;
 
     //loops through each possible wins and checks the board if a particular player has played 
@@ -96,6 +115,76 @@ function isWinner(player){
     return win;
 }
 
+
+
+function minimax(currBoard , player){
+
+    if ( checkWinner(AIChar) ){
+        return {score: 1};
+    }
+    else if(checkWinner (humanChar) ){
+        return { score: -1};
+    }
+    else if(noMorePlay()){
+        return { score: 0};
+    }
+
+    if(player === AIChar){ // maximizing player
+
+        let maxEval = {score: -Infinity};
+        let bestMove = maxEval;
+
+        for(let index = 0; index < currBoard.length; index++){
+
+
+            if(typeof currBoard[index] === 'number'){
+
+                let currindex = currBoard[index];
+
+                currBoard[index] = AIChar;
+                bestMove = minimax(currBoard , humanChar);
+               
+                if(bestMove.score  > maxEval.score){
+                    maxEval.index = currindex;
+                    maxEval.score = bestMove.score;
+                }
+                currBoard[index] = currindex;
+                
+            }
+        }
+
+        return maxEval;
+    }
+    else{
+
+        let maxEval = { score: Infinity, index: -1 };
+        let bestMove = maxEval;
+
+        for (let index = 0; index < currBoard.length; index++) {
+
+            if (typeof currBoard[index] === 'number') {
+
+                let currindex = currBoard[index];
+
+                currBoard[index] = humanChar;
+                bestMove = minimax(currBoard, AIChar);
+    
+
+                if (bestMove.score <  maxEval.score) {
+                    maxEval.index = currindex;
+                    maxEval.score = bestMove.score;
+                }
+
+                currBoard[index] = currindex;
+            
+            }
+        }
+
+        return maxEval;
+    }
+
+}
+
 //chceks to see if there is anymore spots to play 
 // returns true if there is no more spot to play 
 function noMorePlay(){
@@ -111,8 +200,7 @@ function showResults(text){
     winnerText.innerHTML = text;
     result.classList.remove('d-none');
 
-    replayBtn.addEventListener('click', replay);
-
+    replayBtn.addEventListener('click', replay); 
 }
 
 function replay(){

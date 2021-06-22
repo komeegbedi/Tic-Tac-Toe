@@ -48,7 +48,10 @@ div.grid div.row div.col-4:last-child{
     width: 200px;
     color: #000;
     background-color: #fff;
-    font-size: 20px;
+    font-size: 17px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .results{
