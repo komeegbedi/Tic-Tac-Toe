@@ -1,0 +1,74 @@
+body{
+    background: #3494E6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #EC6EAD, #3494E6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #EC6EAD, #3494E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.title{
+    margin-top: 20px;
+    color: #fff;
+}
+
+.lead{
+    color: #fff;
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.grid{
+    width: 600px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+div.grid div.row:not(div.row.third-row){
+    border-bottom: 2px solid #fff;
+}
+
+div.grid div.row div.col-4{
+    width: 200px;
+    height: 150px;
+    border-right: 2px solid #fff;
+    color: #fff;
+    text-align: center;
+    font-size: 80px;
+    font-weight: 100;
+}
+
+div.grid div.row div.col-4:last-child{
+    border-right: none;
+}
+
+.replay{
+    justify-content: center;
+}
+
+.replay button{
+    width: 200px;
+    color: #000;
+    background-color: #fff;
+    font-size: 20px;
+}
+
+.results{
+    position: fixed; /* Sit on top of the page content */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.8); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+.results .result-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+    height: 60%;
+}
