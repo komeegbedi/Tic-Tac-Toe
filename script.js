@@ -116,7 +116,7 @@ function checkWinner(player){
 }
 
 
-
+//using the minimax algorithm for the AI to play
 function minimax(currBoard , player){
 
     if ( checkWinner(AIChar) ){
