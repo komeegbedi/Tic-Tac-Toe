@@ -29,18 +29,20 @@ body{
 }
 
 .grid{
-    width: 600px;
-    margin: auto;
-    margin-top: 100px;
+    display: grid;
+    grid-template-columns: 20% 20% 20%;
+    grid-template-rows: 200px 200px 200px;
+    padding: 10px;
+    justify-content: center;
 }
 
-div.grid div.row:not(div.row.third-row){
+div.grid div.grid-item:not(div.last-row){
     border-bottom: 2px solid #fff;
 }
 
-div.grid div.row div.col-4{
-    width: 200px;
-    height: 150px;
+div.grid div.grid-item{
+    /* width: 200px;
+    height: 150px; */
     border-right: 2px solid #fff;
     color: #fff;
     text-align: center;
@@ -48,7 +50,7 @@ div.grid div.row div.col-4{
     font-weight: 100;
 }
 
-div.grid div.row div.col-4:last-child{
+div.grid div.grid-item.last-col{
     border-right: none;
 }
 
@@ -127,9 +129,7 @@ div.grid div.row div.col-4:last-child{
 
 @media only screen and (max-width: 768px){
 	.grid{
-        width: 100%;
-    }
-    div.grid div.row div.col-4{
-        width: 33.33%;
+        grid-template-columns: 33.3% 33.3% 33.3%;
+        grid-template-rows: 150px 150px 150px;
     }
 }

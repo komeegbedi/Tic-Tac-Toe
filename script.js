@@ -1,7 +1,7 @@
 const gameGrid = document.querySelector('.grid');
 
 //this represents each of the cell
-const gameCell = Array.from(document.querySelectorAll('.grid .col-4'));
+const gameCell = Array.from(document.querySelectorAll('.grid .grid-item'));
 
 const humanChar = 'X';
 const AIChar = 'O';
@@ -206,7 +206,7 @@ function showResults(text){
 function replay(){
 
     board = Array.from(Array(9).keys());
-    let cells = Array.from(document.querySelectorAll('.grid .col-4'));
+    let cells = Array.from(document.querySelectorAll('.grid .grid-item'));
     const result = document.querySelector('.results');
 
     cells.forEach(cell => cell.innerHTML = ' ');
